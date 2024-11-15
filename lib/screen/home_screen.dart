@@ -17,13 +17,18 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // 출발 도착역 선택
               Container(
-                height: 200,
-                color: Colors.white,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SelectStation('출발역'),
+                    Expanded(child: SelectStation('출발역', '선택')),
                     SizedBox(
                       width: 2,
                       height: 50,
@@ -33,13 +38,25 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SelectStation('도착역'),
+                    Expanded(child: SelectStation('도착역', '선택')),
                   ],
                 ),
               ),
+              SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {},
-                child: Text('좌석 선택'),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/Station_List_Page');
+                },
+                child: Text(
+                  '좌석 선택',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
             ],
           ),
@@ -48,11 +65,20 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Column SelectStation(String startEnd) {
+  Column SelectStation(String startEnd, String stationName) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('$startEnd'),
-        TextButton(onPressed: () {}, child: Text('선택')),
+        Text(
+          startEnd,
+          style: TextStyle(
+              fontSize: 16, color: Colors.grey, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 8),
+        Text(
+          stationName,
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }

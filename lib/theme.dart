@@ -20,13 +20,6 @@ final lightTheme = ThemeData(
       foregroundColor: WidgetStatePropertyAll(Colors.white),
     ),
   ),
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: ButtonStyle(
-      shape: WidgetStatePropertyAll(RoundedRectangleBorder()),
-      side: WidgetStatePropertyAll(BorderSide(color: Colors.black38)),
-      foregroundColor: WidgetStatePropertyAll(Colors.black),
-    ),
-  ),
 );
 
 final dartTheme = ThemeData(
@@ -46,13 +39,6 @@ final dartTheme = ThemeData(
     style: ButtonStyle(
       shape: WidgetStatePropertyAll(RoundedRectangleBorder()),
       backgroundColor: WidgetStatePropertyAll(Colors.pinkAccent),
-      foregroundColor: WidgetStatePropertyAll(Colors.white),
-    ),
-  ),
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: ButtonStyle(
-      shape: WidgetStatePropertyAll(RoundedRectangleBorder()),
-      side: WidgetStatePropertyAll(BorderSide(color: Colors.white30)),
       foregroundColor: WidgetStatePropertyAll(Colors.white),
     ),
   ),
