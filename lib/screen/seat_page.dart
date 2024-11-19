@@ -20,25 +20,35 @@ class _SeatPageState extends State<SeatPage> {
       appBar: AppBar(
         title: Text('좌석 선택'),
       ),
-      body: Column(
-        children: [
-          station(startStation, endStation), // 전달받은 데이터 사용
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                label(Colors.purple, '선택됨'),
-                SizedBox(width: 20),
-                label(Colors.grey[300]!, '선택안됨'),
-              ],
-            ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              station(startStation, endStation), // 전달받은 데이터 사용
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    label(Colors.purple, '선택됨'),
+                    SizedBox(width: 20),
+                    label(Colors.grey[300]!, '선택안됨'),
+                  ],
+                ),
+              ),
+              // SelectSeat 추가
+              Expanded(
+                child: SelectSeat(),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text('예매 하기'),
+              ),
+            ],
           ),
-          // SelectSeat 추가
-          Expanded(
-            child: SelectSeat(),
-          ),
-        ],
+        ),
       ),
     );
   }
