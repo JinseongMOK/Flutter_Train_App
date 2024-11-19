@@ -17,6 +17,9 @@ final lightTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
+      padding: WidgetStatePropertyAll(
+        EdgeInsets.symmetric(vertical: 15),
+      ),
       textStyle: WidgetStatePropertyAll(
         TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
@@ -46,6 +49,9 @@ final dartTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
+      padding: WidgetStatePropertyAll(
+        EdgeInsets.symmetric(vertical: 15),
+      ),
       textStyle: WidgetStatePropertyAll(
         TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
