@@ -5,17 +5,24 @@ final lightTheme = ThemeData(
     seedColor: Colors.purple,
     brightness: Brightness.light,
   ),
-  dividerColor: Colors.black38,
+  scaffoldBackgroundColor: Colors.white,
+  dividerColor: Colors.white38,
   highlightColor: Colors.purple,
-  sliderTheme: SliderThemeData(
-    thumbColor: Colors.pinkAccent,
-    activeTrackColor: Colors.black38,
-    inactiveTickMarkColor: Colors.black38,
-    trackHeight: 1,
+  primaryColor: Colors.white,
+  hintColor: Colors.black,
+  cardColor: Colors.grey[300],
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.white,
+    foregroundColor: Colors.black,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      shape: WidgetStatePropertyAll(RoundedRectangleBorder()),
+      textStyle: WidgetStatePropertyAll(
+        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      )),
       backgroundColor: WidgetStatePropertyAll(Colors.purple),
       foregroundColor: WidgetStatePropertyAll(Colors.white),
     ),
@@ -24,21 +31,28 @@ final lightTheme = ThemeData(
 
 final dartTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.pinkAccent,
+    seedColor: Colors.purple,
     brightness: Brightness.dark,
   ),
-  dividerColor: Colors.white38,
-  highlightColor: Colors.pinkAccent,
-  sliderTheme: SliderThemeData(
-    thumbColor: Colors.pinkAccent,
-    activeTrackColor: Colors.white38,
-    inactiveTickMarkColor: Colors.white38,
-    trackHeight: 1,
+  scaffoldBackgroundColor: Colors.black,
+  dividerColor: Colors.grey[800],
+  highlightColor: Colors.purple,
+  primaryColor: Colors.black,
+  hintColor: Colors.white,
+  cardColor: Colors.grey[500],
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.black,
+    foregroundColor: Colors.white,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
-      shape: WidgetStatePropertyAll(RoundedRectangleBorder()),
-      backgroundColor: WidgetStatePropertyAll(Colors.pinkAccent),
+      textStyle: WidgetStatePropertyAll(
+        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      )),
+      backgroundColor: WidgetStatePropertyAll(Colors.purple),
       foregroundColor: WidgetStatePropertyAll(Colors.white),
     ),
   ),
