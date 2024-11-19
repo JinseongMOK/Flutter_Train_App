@@ -1,37 +1,60 @@
 import 'package:flutter/material.dart';
 
 class SelectSeat extends StatefulWidget {
-  const SelectSeat({super.key});
+  final ValueChanged<String> onSeatSelected;
+
+  const SelectSeat({super.key, required this.onSeatSelected});
 
   @override
   State<SelectSeat> createState() => _SelectSeatState();
 }
 
 class _SelectSeatState extends State<SelectSeat> {
-  // 좌석 선택 상태 관리 (여기서는 80개 좌석을 예시로 설정, 20줄 x 4좌석)
   final List<bool> _selectedSeats = List.generate(80, (index) => false);
 
   void toggleSeat(int index) {
     setState(() {
-      _selectedSeats[index] = !_selectedSeats[index];
+      for (int i = 0; i < _selectedSeats.length; i++) {
+        _selectedSeats[i] = false; // 다른 좌석 선택 해제
+      }
+      _selectedSeats[index] = true;
+
+      // 선택된 좌석 정보 전달
+      final rowNumber = index ~/ 4 + 1;
+      final columnLetter = seatAlphabetLabel(index % 4);
+      widget.onSeatSelected('$rowNumber - $columnLetter');
     });
+  }
+
+  String seatAlphabetLabel(int columnIndex) {
+    switch (columnIndex) {
+      case 0:
+        return 'A';
+      case 1:
+        return 'B';
+      case 2:
+        return 'C';
+      case 3:
+        return 'D';
+      default:
+        return '';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 21, // 알파벳 줄 + 20개의 좌석 줄
+      itemCount: 21,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return seatAlphabet(); // 첫 번째 줄: 알파벳
+          return seatAlphabet();
         } else {
-          return seatRow(index); // 나머지 줄: 좌석 행
+          return seatRow(index);
         }
       },
     );
   }
 
-  // 좌석 알파벳 열
   Row seatAlphabet() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +62,6 @@ class _SelectSeatState extends State<SelectSeat> {
     );
   }
 
-  // 한 줄의 좌석
   Widget seatRow(int rowNumber) {
     int baseIndex = (rowNumber - 1) * 4;
     return Padding(
@@ -61,7 +83,6 @@ class _SelectSeatState extends State<SelectSeat> {
     );
   }
 
-  // 좌석 번호 표시
   Container seatColNum(int colNum) {
     return Container(
       width: 50,
@@ -74,7 +95,6 @@ class _SelectSeatState extends State<SelectSeat> {
     );
   }
 
-  // 알파벳 및 좌석 생성용 위젯
   SizedBox row(String alphabet) {
     return SizedBox.square(
       dimension: 50,
@@ -87,7 +107,6 @@ class _SelectSeatState extends State<SelectSeat> {
     );
   }
 
-  // 좌석 위젯
   Widget mySeat(int index) {
     return GestureDetector(
       onTap: () => toggleSeat(index),

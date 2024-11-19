@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_train_app/components/select_seat.dart';
 
@@ -9,6 +10,14 @@ class SeatPage extends StatefulWidget {
 }
 
 class _SeatPageState extends State<SeatPage> {
+  String? _selectedSeat; // 선택된 좌석 정보 저장
+
+  void _updateSelectedSeat(String seat) {
+    setState(() {
+      _selectedSeat = seat;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // 전달받은 arguments를 Map으로 캐스팅
@@ -40,16 +49,55 @@ class _SeatPageState extends State<SeatPage> {
               ),
               // SelectSeat 추가
               Expanded(
-                child: SelectSeat(),
+                child: SelectSeat(onSeatSelected: _updateSelectedSeat),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (_selectedSeat == null) {
+                    _showAlert('좌석을 선택하세요.');
+                  } else {
+                    _showAlert('선택한 좌석: $_selectedSeat');
+                  }
+                },
                 child: Text('예매 하기'),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showAlert(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text('예매 확인'),
+          content: Text(message),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.pop(context); // 다이얼로그 닫기
+              },
+              child: Text(
+                '취소',
+                style: TextStyle(color: Colors.red), // 빨간색 텍스트
+              ),
+            ),
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.pop(context); // 다이얼로그 닫기
+                Navigator.pop(context); // 추가 동작 (필요에 따라 변경 가능)
+              },
+              child: Text(
+                '확인',
+                style: TextStyle(color: Colors.blue), // 파란색 텍스트
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

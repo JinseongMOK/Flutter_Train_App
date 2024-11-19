@@ -26,20 +26,25 @@ class StationListPage extends StatelessWidget {
         child: ListView.builder(
           itemCount: stations.length,
           itemBuilder: (context, index) {
-            return Container(
-              height: 50,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    stations[index],
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+            return InkWell(
+              onTap: () {
+                Navigator.pop(context, stations[index]);
+              },
+              child: SizedBox(
+                height: 50,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      stations[index],
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Divider(color: Colors.grey[300]),
-                ],
+                    Divider(color: Colors.grey[300]),
+                  ],
+                ),
               ),
             );
           },

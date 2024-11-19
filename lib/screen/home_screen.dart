@@ -17,7 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('기차 예매'),
       ),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? Colors.grey[200]
+          : Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Center(
@@ -25,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // 출발 도착역 선택
               Container(
                 height: 150,
                 decoration: BoxDecoration(
@@ -57,12 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
                   padding: const EdgeInsets.symmetric(vertical: 15),
                 ),
-                onPressed: () {},
+                onPressed: (startStation == '선택' || endStation == '선택')
+                    ? null // 출발역과 도착역이 선택되지 않으면 비활성화
+                    : () {
+                        Navigator.of(context).pushNamed(
+                          '/Seat_Page',
+                          arguments: {
+                            'startStation': startStation,
+                            'endStation': endStation,
+                          },
+                        );
+                      },
                 child: Text(
                   '좌석 선택',
                   style: TextStyle(fontSize: 16),
@@ -94,13 +102,15 @@ class _HomeScreenState extends State<HomeScreen> {
             final result =
                 await Navigator.of(context).pushNamed('/Station_List_Page');
             if (result != null && result is String) {
-              setState(() {
-                if (startEnd == '출발역') {
-                  startStation = result;
-                } else if (startEnd == '도착역') {
-                  endStation = result;
-                }
-              });
+              setState(
+                () {
+                  if (startEnd == '출발역') {
+                    startStation = result;
+                  } else if (startEnd == '도착역') {
+                    endStation = result;
+                  }
+                },
+              );
             }
           },
           child: Text(

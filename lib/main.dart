@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/screen/seat_page.dart';
+import 'package:flutter_train_app/screen/station_list_page.dart';
 import 'package:flutter_train_app/screen/home_screen.dart';
 import 'package:flutter_train_app/theme.dart';
 
@@ -13,9 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: lightTheme,
       darkTheme: dartTheme,
+      initialRoute: '/',
+      routes: {
+        '/Station_List_Page': (BuildContext context) => StationListPage(),
+        '/Seat_Page': (BuildContext context) => SeatPage(),
+      },
       home: HomeScreen(),
     );
   }
